@@ -1,3 +1,9 @@
+/*
+This file contains the settings of the Express server
+Author(s): David Morales
+Last Modified: 09/03/2023
+ */
+
 const express = require("express");
 const compression = require("compression");
 const app = express();
@@ -5,7 +11,7 @@ const bodyparser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-const leadRoutes = require("./routes/leadRoute");
+const leadRoutes = require("./routes/leadRoutes");
 
 app.use(compression()); //Enables text compression
 app.use(
@@ -34,7 +40,6 @@ app.use(bodyparser.urlencoded());
 app.use(bodyparser.urlencoded({ extended: true }));
 
 // for parsing multipart/form-data
-app.use(upload.any());
 app.use(express.static("public"));
 
 //Non-protected routes. Should be use for public/unauthenticated routes
