@@ -137,8 +137,33 @@ exports.getLeads = async (req, res) => {
  */
 exports.getLeadsByPagination = async (req, res) => {
   try {
-    //write code here
-    return res.status(405).send("Function not supported yet.");
+    const chunk_index = req.params["chunk_index"] ; //The index of current chunk of entries
+    const limit = req.params["limit"] || 10; //Limits the number of entries
+    const sort = req.params["sort"] || "0"; //Sets sort settings
+    const filter = {};
+    let sort_query = {};
+
+    switch (
+      sort //Checks query code and assigns different kinds of sort
+    ) {
+      case "0":
+        sort_query = { createdAt: 1 };
+        break;
+      case "1":
+        sort_query = { createdAt: -1 }; //Descending order
+        break;
+      default:
+        sort_query = { createdAt: 1 };
+    }
+
+    const query_count = await Lead.countDocuments(filter); //Gets total count of Leads in DB
+
+    const leads = await Lead.find(filter)
+      .skip(chunk_index)
+      .limit(limit) //For pagination purposes
+      .sort(sort_query);
+
+    return res.send({ count: query_count, data: leads });
   } catch (err) {
     console.error(err);
     return res.status(500).send("There was a server error.");

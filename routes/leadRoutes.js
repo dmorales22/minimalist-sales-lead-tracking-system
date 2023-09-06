@@ -20,6 +20,12 @@ router.get("/dashboard/v1/lead/:id", function (req, res) {
   Lead.getLeadById(req, res);
 });
 
+router.get(
+  "/dashboard/v1/lead/page/:limit/:chunk_index/:sort",
+  function (req, res) {
+    Lead.getLeadsByPagination(req, res);
+  }
+);
 router.post("/dashboard/v1/lead/search", function (req, res) {
   Lead.getLeadsByPagination(req, res);
 });
