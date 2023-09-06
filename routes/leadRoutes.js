@@ -1,7 +1,7 @@
 /*
-This file contain the HTTP routes for the Lead model.
+This file contain the HTTP routes for the Lead controller functions.
 Author(s): David Morales
-Last Modified: 09/03/2023
+Last Modified: 09/05/2023
  */
 
 const express = require("express");
@@ -21,7 +21,7 @@ router.get("/dashboard/v1/lead/:id", function (req, res) {
 });
 
 router.post("/dashboard/v1/lead/search", function (req, res) {
-  //Lead.getLeadById(req, res);
+  Lead.getLeadsByPagination(req, res);
 });
 
 router.patch("/dashboard/v1/lead/:id", function (req, res) {

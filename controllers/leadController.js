@@ -1,7 +1,7 @@
 /*
 This file contains controller (CRUD) functions for the Lead model.
 Author(s): David Morales
-Last Modified: 09/03/2023
+Last Modified: 09/05/2023
  */
 
 const { checkEmail, isNumber } = require("../utilities/validators");
@@ -10,11 +10,8 @@ const Lead = require("../models/Lead");
 
 /**
  * This function creates a Lead document.
- * @param {string} req.body.name
- * @param {string} req.body.email
- * @param {string} req.body.estimatedSalesAmount
- * @param {string} req.body.status
- * @param res
+ * @param {Request} req - The Express Request object.
+ * @param {Response} res - The Express Response object.
  * @returns {Promise<*>}
  * @author David Morales
  */
@@ -56,6 +53,7 @@ exports.createLead = async (req, res) => {
     const id = await getNextSequence("lead"); //Gets next incremental id since MongoDB does not support it out of the box.
 
     const newLead = await Lead.create({
+      //Creates Lead document in the database
       id: id,
       name: name,
       email: email,
@@ -72,9 +70,9 @@ exports.createLead = async (req, res) => {
 };
 
 /**
- * This function gets a lead document by using its ID.
- * @param req
- * @param res
+ * This function gets a Lead document by using its ID.
+ * @param {Request} req - The Express Request object.
+ * @param {Response} res - The Express Response object.
  * @returns {Promise<*>}
  * @author David Morales
  */
@@ -112,9 +110,9 @@ exports.getLeadById = async (req, res) => {
 };
 
 /**
- * This function gets all leads in the database.
- * @param req
- * @param res
+ * This function gets all Lead documents in the database.
+ * @param {Request} req - The Express Request object.
+ * @param {Response} res - The Express Response object.
  * @returns {Promise<void>}
  * @author David Morales
  */
@@ -131,9 +129,26 @@ exports.getLeads = async (req, res) => {
 };
 
 /**
- * This function updates a Lead document.
- * @param req
- * @param res
+ * TODO: This function gets Leads from the database using pagination and sorting
+ * @param {Request} req - The Express Request object.
+ * @param {Response} res - The Express Response object.
+ * @returns {Promise<void>}
+ * @author David Morales
+ */
+exports.getLeadsByPagination = async (req, res) => {
+  try {
+    //write code here
+    return res.status(405).send("Function not supported yet.");
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("There was a server error.");
+  }
+};
+
+/**
+ * This function updates a Lead document and validates inputs.
+ * @param {Request} req - The Express Request object.
+ * @param {Response} res - The Express Response object.
  * @returns {Promise<*>}
  * @author David Morales
  */
@@ -157,6 +172,11 @@ exports.updateLeadById = async (req, res) => {
       id: id,
     };
     const updateObj = req.body.update_obj;
+
+    if (updateObj?.email && !checkEmail(updateObj?.email)) {
+      //Checks if email is a valid email string
+      return res.status(400).send("Email is not a valid email.");
+    }
 
     if (
       updateObj?.estimatedSaleAmount &&
@@ -197,8 +217,8 @@ exports.updateLeadById = async (req, res) => {
 
 /**
  * This function deletes a Lead document from the database
- * @param req
- * @param res
+ * @param {Request} req - The Express Request object.
+ * @param {Response} res - The Express Response object.
  * @returns {Promise<*>}
  * @author David Morales
  */
@@ -222,7 +242,7 @@ exports.deleteLeadById = async (req, res) => {
       id: parseInt(id),
     };
 
-    const result = await Lead.deleteOne(filter);
+    await Lead.deleteOne(filter);
 
     return res.send("Lead has been deleted!");
   } catch (err) {

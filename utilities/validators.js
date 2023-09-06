@@ -6,7 +6,7 @@ Last Modified: 09/03/2023
 
 /**
  * This function checks if string is a valid email string.
- * @param {string} email
+ * @param {string} email - A string of an email address
  * @returns {boolean}
  * @author David Morales
  */
@@ -17,7 +17,7 @@ function checkEmail(email) {
 
 /**
  * This function checks if string is a valid number.
- * @param {string} str
+ * @param {string} str - A string of number
  * @returns {boolean}
  * @author David Morales
  */

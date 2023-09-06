@@ -1,20 +1,31 @@
+/*
+This file contains the main entry for the server
+Author(s): David Morales
+Last Modified: 09/05/2023
+ */
+
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const app = require("./index");
 dotenv.config({ path: "./.env" });
-/* Uncomment to enable auth creds to DB
-const DB =
-  "mongodb+srv://" +
-  process.env.MONGODB_USER +
-  ":" +
-  process.env.DB_PASSWORD +
-  "@" +
-  process.env.MONGODB_SERVER +
-  "/" +
-  process.env.MONGODB_NAME +
-  "?retryWrites=true&w=majority";
-*/
-const DB = "mongodb://127.0.0.1/testbackend"; //Comment this line if you're not using local server
+
+let DB = "";
+
+if (process.env.IS_AUTH === 0) {
+  DB =
+    "mongodb://" +
+    process.env.MONGODB_USER +
+    ":" +
+    process.env.DB_PASSWORD +
+    "@" +
+    process.env.MONGODB_SERVER +
+    "/" +
+    process.env.MONGODB_NAME +
+    "?retryWrites=true&w=majority";
+} else {
+  DB =
+    "mongodb://" + process.env.MONGODB_SERVER + "/" + process.env.MONGODB_NAME;
+}
 
 // Connect to MONGODB server.
 mongoose.connect(

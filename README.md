@@ -1,6 +1,6 @@
-# Node.js Template Backend
+# Minimist Sales Tracker Backend
 
-This is a template backend. This is built with Node.js using Express routes with JWT authentication and Express sessions.
+This is the backend for a simple sales lead tracker that handles all the CRUD (Create, Read, Update, Delete) operations. This is a very basic, stripped down backend mainly used for evaluation and testing. This is built with Node.js using Express routes. This backend uses MongoDB with the moongoose driver. This project is structured using the MVC (Model, Viewer, Controller) design pattern with this backend implementing the Model and Controller aspect.
 
 ## Install
 
@@ -17,7 +17,7 @@ Lookup any guides out there to install this software relating to your OS and dev
 
 You can download this project by using the git clone command. Make sure you have proper authorization to use to this Git repository as it may ask for a username and password (or token).
 
-`git clone https://github.com/nop-softworks/node-js-template`
+`git clone https://github.com/dmorales22/minimalist-sales-lead-tracking-system-backend`
 
 ### Quick Start
 
@@ -37,7 +37,7 @@ If you want this server to run continuously in the background, you can create sy
 
 Let's first create the service by running this command:
 
-`sudo nano /etc/systemd/system/nodejs-backend.service`
+`sudo nano /etc/systemd/system/minimalist-sales-lead-tracking-system-backend.service`
 
 Then copy and paste this text below (change `WorkingDirectory` to where ever you downloaded the project):
 
@@ -49,7 +49,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/home/ubuntu/nodejs-backend
+WorkingDirectory=/home/ubuntu/minimalist-sales-lead-tracking-system-backend
 ExecStart=node server.js
 StartLimitIntervalSec=30
 StartLimitBurst=2
@@ -63,15 +63,15 @@ Then save and close the file.
 
 You can start the server by running this command:
 
-`sudo systemctl start nodejs-backend`
+`sudo systemctl start minimalist-sales-lead-tracking-system-backend`
 
 And to make sure the server starts at startup:
 
-`sudo systemctl enable nodejs-backend`
+`sudo systemctl enable minimalist-sales-lead-tracking-system-backend`
 
 You can view the status of the server using this command:
 
-`sudo systemctl status nodejs-backend`
+`sudo systemctl status minimalist-sales-lead-tracking-system-backend`
 
 ## Environment Variables
 
@@ -81,11 +81,15 @@ To run this project, you will need to add the following environment variables to
 
 Ex: 5001
 
+`IS_AUTH` The allows if there is authentication being used to connect to the database
+
+Ex: 0 or 1
+
 `MONGODB_USER` The user of the MongoDB
 
 Ex: dev
 
-`MONGODB_NAME` The name of the database you are trying to access to.
+`MONGODB_NAME` The name of the database you are trying to access to
 
 Ex: DevDB
 
@@ -97,41 +101,9 @@ Ex: localhost:27012
 
 Ex: devPass233xLc@
 
-`TOKEN_KEY` The key for the JWT tokens. It can be any sequence of numbers and letters, just make sure it's a strong key.
-
-Ex: bn2sLcM34xX302PIn\*23
-
-`COOKIE_EXP` The number of hours before a cookie is expires. Please input only a number.
-
-Ex: 24
-
 `CORSURL` An URL or IP address that has access to any routes of the backend. This is to prevent outside sources from running requests to any route of the server.
 
 Ex: localhost:3000
-
-`COOKIE_SECRET` The JWT cookies secret key. It can be any sequence of numbers and letters, just make sure it's a strong key.
-
-Ex: scN9s1BMnXa02uUclmMA2
-
-`SSL_KEY` The directory path of where your SSL key is. This is for SSL and HTTPS.
-
-Ex: /dir/privkey.pem
-
-`SSL_CERT` The directory path of where your SSL cert is. This is for SSL and HTTPS.
-
-Ex: /dir/cert.pem
-
-`SSL_CA` The directory path of where your SSL CA is. This is for SSL and HTTPS.
-
-Ex: /dir/chain.pem
-
-`SITE_URL` The base or default URL the system will use. This is used to hard code URLs like in the QR codes.
-
-Ex: http://localhost:3000/
-
-`DEPLOYMENT`: Either a 0 or 1. 0 is for local testing and 1 is for deployment. Deployment will use HTTPS/SSL and stricter security settings. Please just enter a 0 or 1 only.
-
-Ex: 0
 
 ### Sample .env
 
@@ -141,6 +113,14 @@ And of course, there's a sample .env file is included in this repo.
 
 Here are the list of people have contributed to this repo:
 
-- David Morales (david@nop-softworks.com)
+- David Morales (dmoral1414@gmail.com)
 
 ## Copyright
+
+© 2023 David Morales
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
