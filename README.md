@@ -81,7 +81,7 @@ To run this project, you will need to add the following environment variables to
 
 Ex: 5001
 
-`IS_AUTH` The allows if there is authentication being used to connect to the database
+`IS_AUTH` Boolean if there is authentication being used to connect to the database
 
 Ex: 0 or 1
 
