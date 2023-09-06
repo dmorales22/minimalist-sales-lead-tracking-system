@@ -137,9 +137,9 @@ exports.getLeads = async (req, res) => {
  */
 exports.getLeadsByPagination = async (req, res) => {
   try {
-    const chunk_index = req.body.chunk_index; //The index of current chunk of entries
-    const limit = req.body.limit || 10; //Limits the number of entries
-    const sort = req.body.sort || "0"; //Sets sort settings
+    const chunk_index = req.params["chunk_index"] ; //The index of current chunk of entries
+    const limit = req.params["limit"] || 10; //Limits the number of entries
+    const sort = req.params["sort"] || "0"; //Sets sort settings
     const filter = {};
     let sort_query = {};
 
