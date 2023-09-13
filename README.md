@@ -1,5 +1,7 @@
 # Minimalist Sales Lead Tracker Backend
 
+NOTE: This was made for a coding assessment that was never even viewed by the company I was applying for :( but this can be used a template for a simple CRUD backend using MongoDB so enjoy :) 
+
 This is the backend for a simple sales lead tracker that handles all the CRUD (Create, Read, Update, Delete) operations. This is a very basic, stripped down backend mainly used for evaluation and testing. This is built with Node.js using Express routes. This backend uses MongoDB with the moongoose driver. This project is structured using the MVC (Model, Viewer, Controller) design pattern with this backend implementing the Model and Controller aspect.
 
 ## Install
